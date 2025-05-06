@@ -1,0 +1,141 @@
+/* Admin Panel Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.table th {
+    background-color: #f8f9fa;
+}
+
+.action-btn {
+    margin-right: 5px;
+}
+
+.taxonomy-table td:first-child {
+    font-weight: bold;
+    width: 30%;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.stat {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.stat-label {
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.stat-value {
+    font-size: 1.2em;
+    margin-top: 5px;
+}
+
+.traits-list {
+    padding-left: 20px;
+}
+
+.traits-list li {
+    margin-bottom: 5px;
+}
+
+.form-check-label small {
+    color: #6c757d;
+}
+
+.taxonomy-item {
+    padding: 8px 12px;
+    margin-bottom: 5px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.taxonomy-item:hover {
+    background-color: #e9ecef;
+}
+
+.taxonomy-item.selected {
+    background-color: #007bff;
+    color: white;
+}
+
+.mutation-slots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.mutation-slot, .mutation-result {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    position: relative;
+}
+
+.slot-icon {
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+
+.mutation-plus, .mutation-equals {
+    font-size: 2em;
+    margin: 0 15px;
+    color: #666;
+}
+
+.remove-seed-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+#mutation-message {
+    text-align: center;
+    margin-top: 10px;
+    min-height: 20px;
+}

@@ -1,0 +1,64 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Dashboard - Demeter Admin{% endblock %}
+
+{% block content %}
+<h1>Demeter Admin Paneli</h1>
+<p>Uzay tarım simülasyonu için tohum ansiklopedisi yönetim sistemi</p>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Tohumlar</h5>
+                <p class="card-text">Toplam {{ seed_count }} tohum türü</p>
+                <a href="{{ url_for('admin_seeds') }}" class="btn btn-primary">Tohumları Yönet</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Taksonomi</h5>
+                <p class="card-text">{{ domain_count }} alem tanımlanmış</p>
+                <a href="{{ url_for('admin_taxonomy', level='domain') }}" class="btn btn-primary">Taksonomiyi Yönet</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Özellikler</h5>
+                <p class="card-text">{{ trait_count }} özellik tanımlanmış</p>
+                <a href="{{ url_for('admin_seed_traits') }}" class="btn btn-primary">Özellikleri Yönet</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                Hızlı İşlemler
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+<a href="{{ url_for('admin_seed_add') }}" class="btn btn-success w-100">Yeni Tohum Ekle</a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{ url_for('admin_taxonomy_add', level='genus') }}" class="btn btn-success w-100">Yeni Cins Ekle</a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{ url_for('admin_seed_trait_add') }}" class="btn btn-success w-100">Yeni Özellik Ekle</a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{ url_for('admin_mutation_add') }}" class="btn btn-success w-100">Yeni Mutasyon Ekle</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demeter - Uzay Tarım Simülasyonu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
+</head>
+<body class="game-page">
+    <div class="game-container">
+        <!-- Üst Bilgi Çubuğu -->
+        <header class="game-header">
+            <div class="game-title">DEMETER</div>
+            <div class="resource-bar">
+                <!-- Ana Kaynaklar -->
+                <div class="resource" id="energy">
+                    <div class="resource-icon">⚡</div>
+                    <div class="resource-value">100</div>
+                </div>
+                <div class="resource" id="water">
+                    <div class="resource-icon">💧</div>
+                    <div class="resource-value">100</div>
+                </div>
+                <div class="resource" id="nutrients">
+                    <div class="resource-icon">🧪</div>
+                    <div class="resource-value">50</div>
+                </div>
+                <div class="resource" id="oxygen">
+                    <div class="resource-icon">🌬️</div>
+                    <div class="resource-value">100</div>
+                </div>
+                <div class="resource" id="food">
+                    <div class="resource-icon">🍲</div>
+                    <div class="resource-value">50</div>
+                </div>
+
+                <!-- Mürettebat Bilgileri -->
+                <div class="crew-stat" id="morale">
+                    <div class="crew-icon">😊</div>
+                    <div class="crew-value">80</div>
+                </div>
+                <div class="crew-stat" id="effort-points">
+                    <div class="crew-icon">💪</div>
+                    <div class="crew-value">100</div>
+                </div>
+
+                <div class="day-display">
+                    <span>Gün: </span>
+                    <span id="day-counter">1</span>
+                </div>
+                <div class="game-level">Seviye: <span id="level">1</span></div>
+            </div>
+            <div class="admin-link"><a href="/admin">Admin</a></div>
+        </header>
+
+        <!-- Ana Oyun Alanı -->
+        <div class="game-content">
+            <!-- Sol Panel - Kontroller -->
+            <aside class="side-panel">
+                <div class="panel-section">
+                    <h3>Ekin Seçimi</h3>
+                    <div class="crop-selection">
+                        <!-- Tohum butonları burada dinamik olarak oluşturulacak -->
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>İstasyon Kontrolleri</h3>
+                    <div class="button-group">
+                        <button id="add-module" class="btn">Yeni Modül Ekle</button>
+                        <button id="upgrade-system" class="btn">Sistemleri Yükselt</button>
+
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>İkincil Kaynaklar</h3>
+                    <div class="secondary-resources">
+                        <div class="resource-mini" id="recycled-matter">
+                            <div class="resource-icon">♻️</div>
+                            <div class="resource-info">
+                                <div class="resource-name">Geri Dönüşüm</div>
+                                <div class="resource-value">20</div>
+                            </div>
+                        </div>
+                        <div class="resource-mini" id="scientific-data">
+                            <div class="resource-icon">📊</div>
+                            <div class="resource-info">
+                                <div class="resource-name">Bilimsel Veri</div>
+                                <div class="resource-value">0</div>
+                            </div>
+                        </div>
+                        <div class="resource-mini" id="robot-parts">
+                            <div class="resource-icon">🔧</div>
+                            <div class="resource-info">
+                                <div class="resource-name">Robot Parçaları</div>
+                                <div class="resource-value">10</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>Beceriler</h3>
+                    <div class="skills-container">
+                        <div class="skill">
+                            <span class="skill-name">Tarım:</span>
+                            <span class="skill-value" id="farming-skill">1</span>
+                        </div>
+                        <div class="skill">
+                            <span class="skill-name">Mühendislik:</span>
+                            <span class="skill-value" id="engineering-skill">1</span>
+                        </div>
+                        <div class="skill">
+                            <span class="skill-name">Bilim:</span>
+                            <span class="skill-value" id="science-skill">1</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>Durum Raporu</h3>
+                    <div id="status-report">
+                        Tüm sistemler normal çalışıyor.
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Orta Alan - Tarım Modülleri -->
+            <main class="game-area">
+                <div class="space-station">
+                    <!-- Tarım modülleri burada dinamik olarak oluşturulacak -->
+                    <div id="farm-modules"></div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Bildirim Sistemi -->
+    <div id="notification-area"></div>
+
+    <script src="{{ url_for('static', filename='js/game.js') }}"></script>
+</body>
+</html>

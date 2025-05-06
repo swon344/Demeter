@@ -1,0 +1,56 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ 'Özellik Düzenle' if edit_mode else 'Yeni Özellik Ekle' }} - Demeter Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>{{ 'Özellik Düzenle' if edit_mode else 'Yeni Özellik Ekle' }}</h1>
+    <a href="{{ url_for('admin_seed_traits') }}" class="btn btn-secondary">Geri Dön</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form method="post">
+            <div class="mb-3">
+                <label for="name" class="form-label">Özellik Adı</label>
+                <input type="text" class="form-control" id="name" name="name" 
+                       value="{{ trait.name if trait else '' }}" required>
+                <div class="form-text">Örnek: Soğuğa Dayanıklı</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="effect_type" class="form-label">Etki Türü</label>
+                <select class="form-select" id="effect_type" name="effect_type" required>
+                    <option value="">Etki Türü Seçin</option>
+                    <option value="growth_speed" {% if trait and trait.effect_type == 'growth_speed' %}selected{% endif %}>Büyüme Hızı</option>
+                    <option value="water_usage" {% if trait and trait.effect_type == 'water_usage' %}selected{% endif %}>Su Kullanımı</option>
+                    <option value="light_usage" {% if trait and trait.effect_type == 'light_usage' %}selected{% endif %}>Işık Kullanımı</option>
+                    <option value="nutrient_usage" {% if trait and trait.effect_type == 'nutrient_usage' %}selected{% endif %}>Besin Kullanımı</option>
+                    <option value="oxygen_production" {% if trait and trait.effect_type == 'oxygen_production' %}selected{% endif %}>Oksijen Üretimi</option>
+                    <option value="biomass_production" {% if trait and trait.effect_type == 'biomass_production' %}selected{% endif %}>Biyokütle Üretimi</option>
+                    <option value="mutation_chance" {% if trait and trait.effect_type == 'mutation_chance' %}selected{% endif %}>Mutasyon Şansı</option>
+                    <option value="resistance" {% if trait and trait.effect_type == 'resistance' %}selected{% endif %}>Direnç</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="effect_value" class="form-label">Etki Değeri</label>
+                <input type="number" class="form-control" id="effect_value" name="effect_value" 
+                       value="{{ trait.effect_value if trait else '' }}" step="0.01" required>
+                <div class="form-text">Pozitif değerler artış, negatif değerler azalış anlamına gelir</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Açıklama</label>
+                <textarea class="form-control" id="description" name="description" rows="3">{{ trait.description if trait else '' }}</textarea>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-primary">
+                    {{ 'Güncelle' if edit_mode else 'Kaydet' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

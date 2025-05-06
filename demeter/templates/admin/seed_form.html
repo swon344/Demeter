@@ -1,0 +1,136 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ 'Tohum Düzenle' if edit_mode else 'Yeni Tohum Ekle' }} - Demeter Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>{{ 'Tohum Düzenle' if edit_mode else 'Yeni Tohum Ekle' }}</h1>
+    <a href="{{ url_for('admin_seeds') }}" class="btn btn-secondary">Geri Dön</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form method="post">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="genus_id" class="form-label">Cins</label>
+                    <select class="form-select" id="genus_id" name="genus_id" required>
+                        <option value="">Cins Seçin</option>
+                        {% for genus in genera %}
+                        <option value="{{ genus.id }}" {% if seed and seed.genus_id == genus.id %}selected{% endif %}>
+                            {{ genus.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="species_name" class="form-label">Tür Adı</label>
+                    <input type="text" class="form-control" id="species_name" name="species_name"
+                           value="{{ seed.species_name if seed else '' }}" required>
+                    <div class="form-text">Örnek: sativum (Pisum sativum)</div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="common_name" class="form-label">Yaygın Ad</label>
+                    <input type="text" class="form-control" id="common_name" name="common_name"
+                           value="{{ seed.common_name if seed else '' }}" required>
+                    <div class="form-text">Örnek: Bezelye</div>
+                </div>
+                <div class="col-md-6">
+                    <label for="icon" class="form-label">İkon</label>
+                    <input type="text" class="form-control" id="icon" name="icon"
+                           value="{{ seed.icon if seed else '' }}">
+                    <div class="form-text">Emoji veya ikon kodu</div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Açıklama</label>
+                <textarea class="form-control" id="description" name="description" rows="3">{{ seed.description if seed else '' }}</textarea>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <label for="growth_time" class="form-label">Büyüme Süresi (saat)</label>
+                    <input type="number" class="form-control" id="growth_time" name="growth_time"
+                           value="{{ seed.growth_time if seed else '' }}" min="1" step="1" required>
+                </div>
+                <div class="col-md-3">
+                    <label for="water_req" class="form-label">Su İhtiyacı</label>
+                    <input type="number" class="form-control" id="water_req" name="water_req"
+                           value="{{ seed.water_req if seed else '' }}" min="0" step="0.1" required>
+                </div>
+                <div class="col-md-3">
+                    <label for="light_req" class="form-label">Işık İhtiyacı</label>
+                    <input type="number" class="form-control" id="light_req" name="light_req"
+                           value="{{ seed.light_req if seed else '' }}" min="0" step="0.1" required>
+                </div>
+                <div class="col-md-3">
+                    <label for="nutrient_req" class="form-label">Besin İhtiyacı</label>
+                    <input type="number" class="form-control" id="nutrient_req" name="nutrient_req"
+                           value="{{ seed.nutrient_req if seed else '' }}" min="0" step="0.1" required>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <label for="oxygen_production" class="form-label">Oksijen Üretimi</label>
+                    <input type="number" class="form-control" id="oxygen_production" name="oxygen_production"
+                           value="{{ seed.oxygen_production if seed else '' }}" min="0" step="0.1" required>
+                </div>
+                <div class="col-md-3">
+                    <label for="biomass_production" class="form-label">Biyokütle Üretimi</label>
+                    <input type="number" class="form-control" id="biomass_production" name="biomass_production"
+                           value="{{ seed.biomass_production if seed else '' }}" min="0" step="0.1" required>
+                </div>
+                <div class="col-md-3">
+                    <label for="tier" class="form-label">Seviye</label>
+                    <input type="number" class="form-control" id="tier" name="tier"
+                           value="{{ seed.tier if seed else 1 }}" min="1" max="5" step="1" required>
+                </div>
+                <div class="col-md-3">
+                    <label for="mutation_chance" class="form-label">Mutasyon Şansı</label>
+                    <input type="number" class="form-control" id="mutation_chance" name="mutation_chance"
+                           value="{{ seed.mutation_chance if seed else 0.1 }}" min="0" max="1" step="0.01" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="is_unlocked" name="is_unlocked"
+                           {% if seed and seed.is_unlocked %}checked{% endif %}>
+                    <label class="form-check-label" for="is_unlocked">
+                        Başlangıçta Açık
+                    </label>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">Özellikler</label>
+                <div class="row">
+                    {% for trait in traits %}
+                    <div class="col-md-4 mb-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="trait_{{ trait.id }}"
+                                   name="traits" value="{{ trait.id }}"
+                                   {% if seed_traits and trait.id in seed_traits %}checked{% endif %}>
+                            <label class="form-check-label" for="trait_{{ trait.id }}">
+                                {{ trait.name }}
+                            </label>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-primary">
+                    {{ 'Güncelle' if edit_mode else 'Kaydet' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

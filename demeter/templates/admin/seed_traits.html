@@ -1,0 +1,82 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Tohum Özellikleri - Demeter Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Tohum Özellikleri</h1>
+    <a href="{{ url_for('admin_seed_trait_add') }}" class="btn btn-primary">Yeni Özellik Ekle</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Özellik Adı</th>
+                        <th>Etki Türü</th>
+                        <th>Etki Değeri</th>
+                        <th>Açıklama</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for trait in traits %}
+                    <tr>
+                        <td>{{ trait.id }}</td>
+                        <td>{{ trait.name }}</td>
+                        <td>{{ trait.effect_type }}</td>
+                        <td>{{ trait.effect_value }}</td>
+                        <td>{{ trait.description|truncate(50) }}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <a href="{{ url_for('admin_seed_trait_edit', trait_id=trait.id) }}" class="btn btn-primary">Düzenle</a>
+                                <button type="button" class="btn btn-danger" 
+                                        onclick="confirmDelete('{{ url_for('admin_seed_trait_delete', trait_id=trait.id) }}', 'Bu özelliği silmek istediğinizden emin misiniz?')">
+                                    Sil
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Silme Onay Modalı -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Silme Onayı</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="deleteConfirmMessage"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                <form id="deleteForm" method="post">
+                    <button type="submit" class="btn btn-danger">Sil</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function confirmDelete(url, message) {
+        document.getElementById('deleteForm').action = url;
+        document.getElementById('deleteConfirmMessage').textContent = message;
+        
+        const modal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+        modal.show();
+    }
+</script>
+{% endblock %}

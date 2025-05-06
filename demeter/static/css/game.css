@@ -1,0 +1,625 @@
+/* Oyun Sayfası Stilleri */
+.game-page {
+    background: #0a0a1a;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.game-container {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr 300px;
+    grid-template-areas:
+        "header header"
+        "main sidebar";
+    height: 100vh;
+    gap: 10px;
+    padding: 10px;
+}
+
+/* Üst Bilgi Çubuğu */
+.game-header {
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(40, 42, 54, 0.9);
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.game-title {
+    font-size: 1.5rem;
+    color: #8be9fd;
+    letter-spacing: 3px;
+}
+
+.resource-bar {
+    display: flex;
+    gap: 20px;
+}
+
+.resource {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.resource-icon {
+    font-size: 1.2rem;
+}
+
+.resource-value {
+    font-weight: bold;
+}
+
+#water .resource-value {
+    color: #8be9fd;
+}
+
+#oxygen .resource-value {
+    color: #8be9fd;
+}
+
+#food .resource-value {
+    color: #50fa7b;
+}
+
+#energy .resource-value {
+    color: #ffb86c;
+}
+
+.game-level {
+    color: #ff79c6;
+    font-weight: bold;
+}
+
+/* Oyun Alanı */
+.game-area {
+    grid-area: main;
+    background: rgba(30, 31, 41, 0.7);
+    border-radius: 10px;
+    padding: 20px;
+    overflow: auto;
+    position: relative;
+}
+
+.space-station {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-image: url('/static/images/space-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#farm-modules {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    padding: 20px;
+    height: 100%;
+}
+
+.farm-module {
+    background: rgba(68, 71, 90, 0.7);
+    border: 2px solid #6272a4;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.farm-module:hover {
+    background: rgba(68, 71, 90, 0.9);
+    transform: scale(1.02);
+}
+
+.farm-module.active {
+    border-color: #50fa7b;
+    box-shadow: 0 0 15px rgba(80, 250, 123, 0.5);
+}
+
+.module-empty {
+    color: #6272a4;
+    text-align: center;
+}
+
+.module-crop {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.module-info {
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+/* Kontrol Paneli */
+.control-panel {
+    grid-area: sidebar;
+    background: rgba(40, 42, 54, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.control-panel h3 {
+    color: #ff79c6;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 1px solid #6272a4;
+    padding-bottom: 10px;
+}
+
+.panel-section {
+    margin-bottom: 30px;
+}
+
+.panel-section h4 {
+    color: #8be9fd;
+    margin-bottom: 15px;
+}
+
+.crop-selection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.crop-btn {
+    background: #44475a;
+    border: none;
+    color: #f8f8f2;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.crop-btn:hover {
+    background: #6272a4;
+}
+
+.crop-btn.selected {
+    background: #50fa7b;
+    color: #282a36;
+}
+
+#add-module, #upgrade-system {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #6272a4;
+    border: none;
+    color: #f8f8f2;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#add-module:hover, #upgrade-system:hover {
+    background: #8be9fd;
+    color: #282a36;
+}
+
+#status-report {
+    background: rgba(68, 71, 90, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    height: 100px;
+    overflow-y: auto;
+}
+
+/* Bildirim Sistemi */
+#notification-area {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    z-index: 1000;
+}
+
+.notification {
+    background: rgba(40, 42, 54, 0.9);
+    border-left: 4px solid #50fa7b;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s forwards;
+}
+
+.notification.warning {
+    border-left-color: #ffb86c;
+}
+
+.notification.error {
+    border-left-color: #ff5555;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+}
+.admin-link {
+    margin-left: 10px;
+}
+
+.admin-link a {
+    color: #fff;
+    text-decoration: none;
+    background-color: #333;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.admin-link a:hover {
+    background-color: #555;
+}
+
+/* Gün sayacı */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 5px;
+}
+
+.day-counter {
+    font-size: 1.2rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Kaynak panelleri */
+.resources-panel, .crew-panel {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.resources-panel h3, .crew-panel h3, .crew-panel h4 {
+    color: #ddd;
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #555;
+    padding-bottom: 5px;
+}
+
+/* Mürettebat paneli */
+.crew-stat {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.crew-icon {
+    font-size: 1.5rem;
+    margin-right: 10px;
+    width: 30px;
+    text-align: center;
+}
+
+.crew-info {
+    flex-grow: 1;
+}
+
+.crew-name {
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.crew-value {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Beceriler */
+.skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    color: white;
+}
+
+.skill {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.skill-name {
+    color: #aaa;
+}
+
+.skill-value {
+    font-weight: bold;
+}
+
+/* Genel düzen */
+.game-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.game-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Üst bilgi çubuğu */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-bottom: 1px solid #444;
+}
+
+.resource-bar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.game-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4CAF50;
+    text-shadow: 0 0 5px rgba(76, 175, 80, 0.7);
+}
+
+/* Kaynaklar */
+.resource, .crew-stat {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: white;
+}
+
+.resource-icon, .crew-icon {
+    font-size: 1.2rem;
+}
+
+.resource-value, .crew-value {
+    font-weight: bold;
+}
+
+.day-display, .game-level {
+    color: white;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+/* Yan panel */
+.side-panel {
+    width: 300px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-right: 1px solid #444;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.panel-section {
+    margin-bottom: 20px;
+}
+
+.panel-section h3 {
+    color: #ddd;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #555;
+    padding-bottom: 5px;
+}
+
+/* Buton grubu */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.btn {
+    padding: 8px 12px;
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn:hover {
+    background-color: #34495e;
+}
+
+.btn-primary {
+    background-color: #3498db;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+}
+
+/* İkincil kaynaklar */
+.secondary-resources {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.resource-mini {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: white;
+}
+
+.resource-mini .resource-icon {
+    font-size: 1rem;
+}
+
+.resource-mini .resource-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.resource-mini .resource-name {
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+.resource-mini .resource-value {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Beceriler */
+.skills-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.skill {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    color: white;
+}
+
+/* Oyun alanı */
+.game-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.space-station {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#farm-modules {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+/* Ekin seçimi */
+.crop-selection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.crop-btn {
+    padding: 8px;
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    text-align: center;
+}
+
+.crop-btn:hover {
+    background-color: #34495e;
+}
+
+.crop-btn.selected {
+    background-color: #27ae60;
+}
+
+/* Durum raporu */
+#status-report {
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: #ddd;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Bildirim alanı */
+#notification-area {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 300px;
+    z-index: 1000;
+}
+
+.notification {
+    padding: 10px 15px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s forwards;
+}
+
+.notification.info {
+    border-left: 4px solid #3498db;
+}
+
+.notification.success {
+    border-left: 4px solid #2ecc71;
+}
+
+.notification.warning {
+    border-left: 4px solid #f39c12;
+}
+
+.notification.error {
+    border-left: 4px solid #e74c3c;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+}

@@ -1,0 +1,46 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ 'Cins Düzenle' if edit_mode else 'Yeni Cins Ekle' }} - Demeter Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>{{ 'Cins Düzenle' if edit_mode else 'Yeni Cins Ekle' }}</h1>
+    <a href="{{ url_for('admin_taxonomy', level='genus') }}" class="btn btn-secondary">Geri Dön</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form method="post">
+            <div class="mb-3">
+                <label for="name" class="form-label">Cins Adı</label>
+                <input type="text" class="form-control" id="name" name="name" 
+                       value="{{ item.name if item else '' }}" required>
+                <div class="form-text">Örnek: Pisum</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="family_id" class="form-label">Familya</label>
+                <select class="form-select" id="family_id" name="family_id" required>
+                    <option value="">Familya Seçin</option>
+                    {% for family in parent_items %}
+                    <option value="{{ family.id }}" {% if item and item.family_id == family.id %}selected{% endif %}>
+                        {{ family.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Açıklama</label>
+                <textarea class="form-control" id="description" name="description" rows="3">{{ item.description if item else '' }}</textarea>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-primary">
+                    {{ 'Güncelle' if edit_mode else 'Kaydet' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
