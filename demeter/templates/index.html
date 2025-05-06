@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demeter - Uzay Tarım Oyunu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="home-page">
+    <div class="stars"></div>
+    <div class="container">
+        <header>
+            <h1>DEMETER</h1>
+            <h2>Uzayda Tarım Macerası</h2>
+        </header>
+
+        <main>
+            <div class="game-intro">
+                <p>Uzay istasyonunuzda kendi tarım koloninizi kurun, bitkiler yetiştirin ve hayatta kalın!</p>
+                <a href="/game" class="start-button">Oyuna Başla</a>
+            </div>
+
+            <div class="game-features">
+                <div class="feature">
+                    <div class="feature-icon">🌱</div>
+                    <h3>Uzayda Tarım</h3>
+                    <p>Özel bitki türleri yetiştirin ve uzay ortamına adapte edin</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Kaynak Yönetimi</h3>
+                    <p>Su, oksijen ve enerji kaynaklarınızı dikkatli kullanın</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🚀</div>
+                    <h3>İstasyon Geliştirme</h3>
+                    <p>Tarım istasyonunuzu genişletin ve yeni teknolojiler keşfedin</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Demeter Uzay Tarım Simülasyonu</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
